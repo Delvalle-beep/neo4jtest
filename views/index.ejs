@@ -5,26 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualização</title>
-</head>
-<body>
-    <div class="things">TESTE</div></div>
-<script>
-    let registros = <%- JSON.stringify(doc) %>
+    <style type="text/css">
+        html, body {
+            font: 16pt arial;
+        }
 
-    $(document).ready(() => {
-        console.log(registros)
+        #viz {
+            width: 900px;
+            height: 700px;
+            border: 1px solid lightgray;
+            font: 22pt arial;
+        }
+    </style>
+<script type="text/javascript">
 
-        let linhas = ''
-        registros.forEach((it) => {
-            linhas += `
-            <ul>
-                <li>${it._fields.properties.title}</li>
-            </ul>
-            `
-        })
-        
-        $('things').html(linhas)
-    })
+    var viz;
+
+    function draw() {
+        var config = {
+            container_id: "viz",
+            server_url: "neo4j+s://964fa567.databases.neo4j.io",
+            server_user: "neo4j",
+            server_password: "KqJ8PpexEcsOeb5IbRDszL7QZnRlkBuQEQHRv3tjksg",
+            labels: {
+                "Character": {
+                    "caption": "name",
+                    "size": "pagerank",
+                    "community": "community",
+                    "title_properties": [
+                        "name",
+                        "pagerank"
+                    ]
+                }
+            },
+            relationships: {
+                "INTERACTS": {
+                    "thickness": "weight",
+                    "caption": false
+                }
+            },
+            initial_cypher: "MATCH (n)-[r:INTERACTS]->(m) RETURN *"
+        };
+
+        viz = new NeoVis.default(config);
+        viz.render();
+    }
 </script>
-</body>
+</head>
+<body onload="draw()"></body>
+    <div class="things"></div></div>
+
+    <div id="viz"></div>
+</body>   
 </html>

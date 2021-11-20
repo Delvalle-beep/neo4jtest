@@ -4,6 +4,8 @@ var logger = require('morgan');
 var fs = require('fs').promises;
 var bodyParser = require('body-parser');
 var neo4j = require('neo4j-driver');
+// var neovis = require('neovis.js');
+
 
 var app = express();
 
@@ -30,8 +32,8 @@ app.get('/', async function(req, res){
     res.render('index', {doc: registros.records})
 });
 
-app.listen(80);
-console.log('O Server iniciou na porta 80');
+app.listen(3000);
+console.log('Funcionou essa merda!');
 
 module.exports = app;
 
