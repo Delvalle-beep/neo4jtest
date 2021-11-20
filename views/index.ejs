@@ -8,6 +8,12 @@
     <style type="text/css">
         html, body {
             font: 16pt arial;
+            justify-content: center;
+            justify-items: center;
+            align-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
         }
 
         #viz {
@@ -16,45 +22,50 @@
             border: 1px solid lightgray;
             font: 22pt arial;
         }
+
     </style>
+    <script src="https://cdn.neo4jlabs.com/neovis.js/v1.5.0/neovis.js"></script>
+    <script src="https://rawgit.com/neo4j-contrib/neovis.js/master/dist/neovis.js"></script>
+
 <script type="text/javascript">
 
     var viz;
 
     function draw() {
+        console.log("Rodando...")
         var config = {
             container_id: "viz",
-            server_url: "neo4j+s://964fa567.databases.neo4j.io",
+            server_url: "bolt://3.238.222.24:7687",
             server_user: "neo4j",
-            server_password: "KqJ8PpexEcsOeb5IbRDszL7QZnRlkBuQEQHRv3tjksg",
+            server_password: "molecule-courtesy-figure",
             labels: {
-                "Character": {
+                "Movie": {
+                    "caption": "title",
+                    "size": 1.0,
+                    "community": "community"
+                },
+                "Person": {
                     "caption": "name",
-                    "size": "pagerank",
-                    "community": "community",
-                    "title_properties": [
-                        "name",
-                        "pagerank"
-                    ]
-                }
+                    "size": 1.0
+                },
+
             },
             relationships: {
-                "INTERACTS": {
+                "ACTED_IN": {
                     "thickness": "weight",
-                    "caption": false
+                    "caption": "Acted In"
                 }
             },
-            initial_cypher: "MATCH (n)-[r:INTERACTS]->(m) RETURN *"
+            initial_cypher: "match (p:Person)-[r]-(o:Movie)-[r1]-(p2:Person) RETURN *;"
         };
 
         viz = new NeoVis.default(config);
         viz.render();
+        console.log(viz);
     }
 </script>
 </head>
-<body onload="draw()"></body>
-    <div class="things"></div></div>
-
+<body onload="draw()">
     <div id="viz"></div>
 </body>   
 </html>
