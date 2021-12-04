@@ -15,7 +15,7 @@
             width: 100%;
             height: 100%;
         }
-
+        
         #viz {
             width: 900px;
             height: 700px;
@@ -26,39 +26,15 @@
     </style>
     <script src="https://cdn.neo4jlabs.com/neovis.js/v1.5.0/neovis.js"></script>
     <script src="https://rawgit.com/neo4j-contrib/neovis.js/master/dist/neovis.js"></script>
+    
 
 <script type="text/javascript">
-
-    var viz;
-
+    
+    var viz
+    
     function draw() {
         console.log("Rodando...")
-        var config = {
-            container_id: "viz",
-            server_url: "bolt://3.238.222.24:7687",
-            server_user: "neo4j",
-            server_password: "molecule-courtesy-figure",
-            labels: {
-                "Movie": {
-                    "caption": "title",
-                    "size": 1.0,
-                    "community": "community"
-                },
-                "Person": {
-                    "caption": "name",
-                    "size": 1.0
-                },
-
-            },
-            relationships: {
-                "ACTED_IN": {
-                    "thickness": "weight",
-                    "caption": "Acted In"
-                }
-            },
-            initial_cypher: "match (p:Person)-[r]-(o:Movie)-[r1]-(p2:Person) RETURN *;"
-        };
-
+        const config = <%- JSON.stringify(configs); %> 
         viz = new NeoVis.default(config);
         viz.render();
         console.log(viz);

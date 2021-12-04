@@ -4,7 +4,7 @@ var logger = require('morgan');
 var fs = require('fs').promises;
 var bodyParser = require('body-parser');
 var neo4j = require('neo4j-driver');
-//var neovis = require('neovis.js');
+// var neovis = require('neovis.js');
 
 
 var app = express();
@@ -21,16 +21,47 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //neo4j.driver(Url do DataBase)
 //Aonde está neo4j.auth.basic('login','senha') alterar os campos
-// var driver = neo4j.driver('neo4j+s://964fa567.databases.neo4j.io', neo4j.auth.basic('neo4j','KqJ8PpexEcsOeb5IbRDszL7QZnRlkBuQEQHRv3tjksg'));
-// var session = driver.session();
 
 app.get('/', async function(req, res){
-    // let registros = await session.run('MATCH(n:Movie)RETURN n LIMIT 25')
-    // await fs.writeFile('registros.json', JSON.stringify(registros.records), 'utf-8');
-    
-    // console.log(registros.records.length)
-    res.render('index')
-});
+   
+
+    var config = {
+        container_id: "viz",
+        server_url:"bolt://824d2fd3.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "cWiIFqGtm45j2kVFVIeqliZKEZSrGSb-UB1kgNrEG10",
+        labels: {
+            "Team":{
+                "caption":"name",
+                "size": 1.0
+            },
+            "Member": {
+                "caption": "name",
+                "size": 1.0,
+                "community": "community"
+            },
+            "Initative":{
+                "caption":"name",
+                "size": 1.0
+            }
+        },
+        relationships: {
+            "Merber_Of": {
+                "thickness": "weight",
+                "caption": "Member Of"
+            },
+            "Working_ON": {
+                "thickness": "weight",
+                "caption": "Working On"
+            }
+        },
+        initial_cypher: `MATCH (n) RETURN (n)`,
+        encrypted: "ENCRYPTION_ON",
+        trust: "TRUST_SYSTEM_CA_SIGNED_CERTIFICATES"
+    };
+
+    res.render('index', {configs: config});
+})
 
 app.listen(3000);
 console.log('Funcionou essa merda!');
