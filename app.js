@@ -27,7 +27,7 @@ app.get('/', async function(req, res){
 
     var config = {
         container_id: "viz",
-        server_url:"bolt://4c29082c.databases.neo4j.io:7687",
+        server_url:"bolt://824d2fd3.databases.neo4j.io",
         server_user: "neo4j",
         server_password: "cWiIFqGtm45j2kVFVIeqliZKEZSrGSb-UB1kgNrEG10",
         labels: {
