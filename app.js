@@ -58,10 +58,10 @@ app.get('/', async function(req, res){
         //Conectar t:Team de uma das tabelas com o n:Member
         //Depois conectar a iniciativa com m:Member de outra das tabelas
         initial_cypher: `LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/Meisam-A/ER/main/dummy%20to%20be%20visualized.xlsx%20-%20member_of.csv' AS row_t
-                        LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/Meisam-A/ER/main/dummy%20to%20be%20visualized.xlsx%20-%20working_on.csv' AS row_i
-                        MERGE (t:Team {Name: row_t.Team})
-                        MERGE (n:Member {Name: row_t.Member_T}) WITH
-                        MATCH (t:Team)-[r2:Member_Of]->(n:Member)`,
+                         LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/Meisam-A/ER/main/dummy%20to%20be%20visualized.xlsx%20-%20working_on.csv' AS row_i
+                         MATCH (t:Team {Name: row_t.Team})
+                         MATCH (n:Member {Name: row_t.Member_T})
+                         MATCH (n)-[r2:Member_Of]->(t)`,
         encrypted: "ENCRYPTION_ON",
         trust: "TRUST_SYSTEM_CA_SIGNED_CERTIFICATES"
     };
