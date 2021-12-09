@@ -55,8 +55,7 @@ app.get('/', async function(req, res){
                 "caption": "Working On"
             }
         },
-        //Conectar t:Team de uma das tabelas com o n:Member
-        //Depois conectar a iniciativa com m:Member de outra das tabelas
+        
         initial_cypher: `LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/Meisam-A/ER/main/dummy%20to%20be%20visualized.xlsx%20-%20member_of.csv' AS row_t
                          LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/Meisam-A/ER/main/dummy%20to%20be%20visualized.xlsx%20-%20working_on.csv' AS row_i
                          MATCH (t:Team {Name: row_t.Team}),
@@ -77,5 +76,6 @@ app.listen(3000);
 
 module.exports = app;
 
-//depois de tudo instalar via terminal o nodemol versão global
+//depois de tudo instalar via terminal o nodemon versão global
 // comando "npm install nodemon -g"
+//"nodemon app.js"

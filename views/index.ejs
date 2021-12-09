@@ -33,7 +33,6 @@
     var viz
     
     function draw() {
-        // console.log("Rodando...")
         const config = <%- JSON.stringify(configs); %> 
         viz = new NeoVis.default(config);
         viz.render();
