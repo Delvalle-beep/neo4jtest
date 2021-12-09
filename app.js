@@ -74,7 +74,6 @@ app.get('/', async function(req, res){
 })
 
 app.listen(3000);
-console.log('Funcionou essa merda!');
 
 module.exports = app;
 
