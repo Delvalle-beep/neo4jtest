@@ -9,7 +9,7 @@ var neo4j = require('neo4j-driver');
 
 var app = express();
 
-//View Engine
+//View Engine 
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','ejs');
@@ -47,12 +47,9 @@ app.get('/', async function(req, res){
         },
         relationships: {
             "Merber_Of": {
-                "thickness": "weight",
-                "caption": "Member Of"
             },
             "Working_ON": {
-                "thickness": "weight",
-                "caption": "Working On"
+                
             }
         },
         
