@@ -30,17 +30,14 @@ app.get('/', async function(req, res){
         server_password: "cWiIFqGtm45j2kVFVIeqliZKEZSrGSb-UB1kgNrEG10",
         labels: {
             "Team":{
-                "caption": "name",
-                "size": "pagerank",
-                "community": "community",
-                "title_properties": [
-                    "name"
-                ],
+                "size":1.0
             },
             "Member": {
+                "size":1.0,
                 "community": "community"
             },
             "Initative":{
+                "size":1.0
             }
         },
         relationships: {
@@ -49,14 +46,13 @@ app.get('/', async function(req, res){
             "Working_ON": {   
             }
         },
-        arrows: true,
         initial_cypher: `LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/Meisam-A/ER/main/dummy%20to%20be%20visualized.xlsx%20-%20member_of.csv' AS row_t
                          LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/Meisam-A/ER/main/dummy%20to%20be%20visualized.xlsx%20-%20working_on.csv' AS row_i
-                         MATCH (t:Team {name: row_t.Team}),
-                         (n:Member {name: row_t.Member_T}),
+                         MATCH (t:Team {Name: row_t.Team}),
+                         (n:Member {Name: row_t.Member_T}),
                          p = shortestPath((n)-[:Member_Of]->(t))
-                         MATCH (i:Initative {name: row_i.Initative}),
-                         (m:Member {name: row_i.Member_I}),
+                         MATCH (i:Initative {Name: row_i.Initative}),
+                         (m:Member {Name: row_i.Member_I}),
                          q = shortestPath((m)-[:Working_ON]->(i))
                          RETURN p,q`,
 
