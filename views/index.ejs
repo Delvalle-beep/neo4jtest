@@ -24,6 +24,15 @@
             border: 1px solid lightgray;
             font: 22pt arial;
         }
+        #searchbar{
+            width:90vh;
+            height: 8vh;
+            margin-left: 50vh;
+            margin-right: 50vh;
+            background-color: black;
+            color:white;
+            text-align: center;
+        }
 
     </style>
     <script src="https://cdn.neo4jlabs.com/neovis.js/v1.5.0/neovis.js"></script>
@@ -39,10 +48,19 @@
         viz = new NeoVis.default(config);
         viz.render();
     }
+    function initativeFilter(){
+        
+    }
 </script>
 </head>
 <body onload="draw()">
     <div id="viz"></div>
+    <div id="searchbar">
+        <h3>Filters</h3>
+        <button>Initatives</button>
+        <button>Teams</button>
+        <button>Members</button>
+    </div>
 
 </body>
  

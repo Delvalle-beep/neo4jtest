@@ -29,21 +29,28 @@ app.get('/', async function(req, res){
         server_user: "neo4j",
         server_password: "cWiIFqGtm45j2kVFVIeqliZKEZSrGSb-UB1kgNrEG10",
         labels: {
-            "Team":{
-                "size":1.0
-            },
-            "Member": {
-                "size":1.0,
-                "community": "community"
-            },
-            "Initative":{
-                "size":1.0
-            }
+           "Team":{
+               caption:"Name",
+               size:"pagerank",
+               community:"community"
+           },
+           "Member":{
+               caption:"Name",
+               community:""
+           },
+           "Initative":{
+               caption:"Name",
+               
+           }
         },
         relationships: {
             "Merber_Of": {
+                caption:"false",
+                thickness:"count"
             },
             "Working_ON": {   
+                caption:"false",
+                thickness:"count"
             }
         },
         initial_cypher: `LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/Meisam-A/ER/main/dummy%20to%20be%20visualized.xlsx%20-%20member_of.csv' AS row_t
