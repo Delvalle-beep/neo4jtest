@@ -36,7 +36,6 @@ app.get('/', async function(req, res){
            },
            "Member":{
                caption:"Name",
-               community:""
            },
            "Initative":{
                caption:"Name",
@@ -55,13 +54,9 @@ app.get('/', async function(req, res){
         },
         initial_cypher: `LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/Meisam-A/ER/main/dummy%20to%20be%20visualized.xlsx%20-%20member_of.csv' AS row_t
                          LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/Meisam-A/ER/main/dummy%20to%20be%20visualized.xlsx%20-%20working_on.csv' AS row_i
-                         MATCH (t:Team {Name: row_t.Team}),
-                         (n:Member {Name: row_t.Member_T}),
-                         p = shortestPath((n)-[:Member_Of]->(t))
-                         MATCH (i:Initative {Name: row_i.Initative}),
-                         (m:Member {Name: row_i.Member_I}),
-                         q = shortestPath((m)-[:Working_ON]->(i))
-                         RETURN p,q`,
+                         MATCH resultado = (n:Member {Name: row_t.Member_T})-[:Member_Of]->(t:Team {Name: row_t.Team})
+<-[:Member_Of]-(m:Member {Name: row_i.Member_I})-[:Working_ON]->(i:Initative {Name: row_i.Initative})<-[:Working_ON]-(n)
+RETURN resultado`,
 
         encrypted: "ENCRYPTION_OFF",
         trust: "TRUST_SYSTEM_CA_SIGNED_CERTIFICATES"
